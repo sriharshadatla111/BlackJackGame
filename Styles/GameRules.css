@@ -1,0 +1,31 @@
+﻿
+.box 
+{
+    display: flex;
+    width: 1179px;
+    height: 1183px;
+    color: white;
+    font-size: 23px;
+    left:150px;
+    right:150px;
+    top:20px;
+    position:absolute;
+    
+}
+.info
+{
+    font-family:'Times New Roman', Times, serif;
+    color:lavender;
+    height: 2219px;
+    width: 1160px;
+    position:absolute;
+    top: 100px;
+    left: 10px;
+   
+}
+h2
+{
+    text-align:center;
+    color:orangered;
+    text-decoration:underline;
+}

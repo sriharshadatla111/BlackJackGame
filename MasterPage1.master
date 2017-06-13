@@ -1,0 +1,89 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage1.master.cs" Inherits="MasterPage1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <%--<link href="Styles/MasterPage1.css" rel="stylesheet" />--%>
+    <asp:ContentPlaceHolder id="head" runat="server">
+        
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            text-align: center;
+        }
+    </style>
+</head>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=devic  e-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<body>
+        
+    
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+                <div class="row" style="padding-bottom:10px">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <p><b>BLACKJACK</b></p>
+                        </div>
+                        <div class="navbar-form navbar-right">
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="MainPage.aspx" style="color: royalblue;font-size:25px">Home</a></li>
+                                <li class="divider" role="separator"></li>
+                                <li><a href="AdminPage.aspx" style="color: royalblue;font-size:25px">Admin Login</a></li>
+                                <li class="divider" role="separator"></li>
+                                <li><a href="GameRules.aspx" style="color: royalblue;font-size:25px">Game Rules</a></li>
+                                <li class="divider" role="separator"></li>
+                                <li><a href="Sponsors.aspx" style="color: royalblue;font-size:25px">Our Sponsors</a></li>
+                                <li class="divider" role="separator"></li>
+                                <li><a href="ContactUs.aspx" style="color: royalblue;font-size:25px">Contact Us</a></li>
+                                <li class="divider" role="separator"></li>
+                                <!--<li class="dropdown">
+                                    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: royalblue;font-size:25px">Destinations<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Houston</a></li>
+                                        <li class="divider" role="separator"></li>
+                                        <li><a href="#">Dallas</a></li>
+                                        <li class="divider" role="separator"></li>
+                                        <li><a href="#">California</a></li>
+                                    </ul>
+                                </li>-->
+                            </ul>
+                        </div>
+                    </div> 
+
+                </div>
+        </div>
+    </nav>
+    <!--
+    <div class="wrapper">
+        <div class="menu">
+            <ul>
+                <li class="auto-style1"><a href="MainPage.aspx">Home </a></li>
+                <li class="auto-style1"><a href="AdminPage.aspx">Admin Login</a></li>
+                <li class="auto-style1"><a href="GameRules.aspx"> Game Rules</a></li>
+                <li class="auto-style1"><a href="Sponsors.aspx">Our Sponsors</a></li>
+                <li class="auto-style1"><a href="ContactUs.aspx">Contact Us</a></li>
+            </ul>
+        </div>
+     <div class="clear"></div>
+     </div>-->
+    
+    <asp:ContentPlaceHolder id="body" runat="server">
+        
+    </asp:ContentPlaceHolder>
+</body>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</html>
+

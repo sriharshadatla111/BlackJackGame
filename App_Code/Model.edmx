@@ -1,0 +1,692 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account_Details">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bankbalance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="A_uname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="A_password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="A_lastlogin" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="A_maxlimit" Type="int" Nullable="false" />
+          <Property Name="A_minlimit" Type="int" Nullable="false" />
+          <Property Name="A_checkflag" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CardInfo">
+          <Key>
+            <PropertyRef Name="CardInfoId" />
+          </Key>
+          <Property Name="CardInfoId" Type="int" Nullable="false" />
+          <Property Name="PokerOrder" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Image" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardInfoId" Type="int" />
+          <Property Name="Deck" Type="int" />
+          <Property Name="IsAvailable" Type="bit" />
+        </EntityType>
+        <EntityType Name="Scores">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LostCount" Type="int" />
+          <Property Name="WinCount" Type="int" />
+          <Property Name="BJCount" Type="int" />
+        </EntityType>
+        <EntityType Name="User_Bank_Details">
+          <Key>
+            <PropertyRef Name="Cardnumber" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cardnumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cardname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cardexpiry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pin" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Funds">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Funds" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Profile_Details">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sanswer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dateofbirth" Type="date" Nullable="false" />
+          <Property Name="Squestion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Account_D__UserI__54CB950F">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="Account_Details" Type="Self.Account_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Account_Details">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_D__Usern__640DD89F">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Account_Details" Type="Self.Account_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Account_Details">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cards__CardInfoI__6442E2C9">
+          <End Role="CardInfo" Type="Self.CardInfo" Multiplicity="0..1" />
+          <End Role="Cards" Type="Self.Cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardInfo">
+              <PropertyRef Name="CardInfoId" />
+            </Principal>
+            <Dependent Role="Cards">
+              <PropertyRef Name="CardInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scores__UserId__589C25F3">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="Scores" Type="Self.Scores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Scores">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scores__Username__6501FCD8">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Scores" Type="Self.Scores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Scores">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Bank__UserI__5C6CB6D7">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="User_Bank_Details" Type="Self.User_Bank_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_Bank_Details">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Bank__Usern__65F62111">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="User_Bank_Details" Type="Self.User_Bank_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="User_Bank_Details">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Fund__UserI__603D47BB">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="User_Funds" Type="Self.User_Funds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_Funds">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Fund__Usern__67DE6983">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="User_Funds" Type="Self.User_Funds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="User_Funds">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__UserId__66EA454A">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Account_Details" EntityType="Self.Account_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardInfo" EntityType="Self.CardInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scores" EntityType="Self.Scores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Bank_Details" EntityType="Self.User_Bank_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Funds" EntityType="Self.User_Funds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Profile_Details" EntityType="Self.User_Profile_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account_D__UserI__54CB950F" Association="Self.FK__Account_D__UserI__54CB950F">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="Account_Details" EntitySet="Account_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_D__Usern__640DD89F" Association="Self.FK__Account_D__Usern__640DD89F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Account_Details" EntitySet="Account_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cards__CardInfoI__6442E2C9" Association="Self.FK__Cards__CardInfoI__6442E2C9">
+            <End Role="CardInfo" EntitySet="CardInfo" />
+            <End Role="Cards" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scores__UserId__589C25F3" Association="Self.FK__Scores__UserId__589C25F3">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="Scores" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scores__Username__6501FCD8" Association="Self.FK__Scores__Username__6501FCD8">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Scores" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Bank__UserI__5C6CB6D7" Association="Self.FK__User_Bank__UserI__5C6CB6D7">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="User_Bank_Details" EntitySet="User_Bank_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Bank__Usern__65F62111" Association="Self.FK__User_Bank__Usern__65F62111">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Bank_Details" EntitySet="User_Bank_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Fund__UserI__603D47BB" Association="Self.FK__User_Fund__UserI__603D47BB">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="User_Funds" EntitySet="User_Funds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Fund__Usern__67DE6983" Association="Self.FK__User_Fund__Usern__67DE6983">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Funds" EntitySet="User_Funds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__UserId__66EA454A" Association="Self.FK__Users__UserId__66EA454A">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account_Details">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bankbalance" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User_Profile_Details" Relationship="Self.FK__Account_D__UserI__54CB950F" FromRole="Account_Details" ToRole="User_Profile_Details" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Account_D__Usern__640DD89F" FromRole="Account_Details" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="A_uname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="A_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="A_lastlogin" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="A_maxlimit" Type="Int32" Nullable="false" />
+          <Property Name="A_minlimit" Type="Int32" Nullable="false" />
+          <Property Name="A_checkflag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CardInfo">
+          <Key>
+            <PropertyRef Name="CardInfoId" />
+          </Key>
+          <Property Name="CardInfoId" Type="Int32" Nullable="false" />
+          <Property Name="PokerOrder" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cards" Relationship="Self.FK__Cards__CardInfoI__6442E2C9" FromRole="CardInfo" ToRole="Cards" />
+        </EntityType>
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardInfoId" Type="Int32" />
+          <Property Name="Deck" Type="Int32" />
+          <Property Name="IsAvailable" Type="Boolean" />
+          <NavigationProperty Name="CardInfo" Relationship="Self.FK__Cards__CardInfoI__6442E2C9" FromRole="Cards" ToRole="CardInfo" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LostCount" Type="Int32" />
+          <Property Name="WinCount" Type="Int32" />
+          <Property Name="BJCount" Type="Int32" />
+          <NavigationProperty Name="User_Profile_Details" Relationship="Self.FK__Scores__UserId__589C25F3" FromRole="Scores" ToRole="User_Profile_Details" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Scores__Username__6501FCD8" FromRole="Scores" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User_Bank_Details">
+          <Key>
+            <PropertyRef Name="Cardnumber" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cardnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cardname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cardexpiry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User_Profile_Details" Relationship="Self.FK__User_Bank__UserI__5C6CB6D7" FromRole="User_Bank_Details" ToRole="User_Profile_Details" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User_Bank__Usern__65F62111" FromRole="User_Bank_Details" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User_Funds">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Funds" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User_Profile_Details" Relationship="Self.FK__User_Fund__UserI__603D47BB" FromRole="User_Funds" ToRole="User_Profile_Details" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User_Fund__Usern__67DE6983" FromRole="User_Funds" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User_Profile_Details">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sanswer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dateofbirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Squestion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Account_Details" Relationship="Self.FK__Account_D__UserI__54CB950F" FromRole="User_Profile_Details" ToRole="Account_Details" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK__Scores__UserId__589C25F3" FromRole="User_Profile_Details" ToRole="Scores" />
+          <NavigationProperty Name="User_Bank_Details" Relationship="Self.FK__User_Bank__UserI__5C6CB6D7" FromRole="User_Profile_Details" ToRole="User_Bank_Details" />
+          <NavigationProperty Name="User_Funds" Relationship="Self.FK__User_Fund__UserI__603D47BB" FromRole="User_Profile_Details" ToRole="User_Funds" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__UserId__66EA454A" FromRole="User_Profile_Details" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Account_Details" Relationship="Self.FK__Account_D__Usern__640DD89F" FromRole="Users" ToRole="Account_Details" />
+          <NavigationProperty Name="Scores" Relationship="Self.FK__Scores__Username__6501FCD8" FromRole="Users" ToRole="Scores" />
+          <NavigationProperty Name="User_Bank_Details" Relationship="Self.FK__User_Bank__Usern__65F62111" FromRole="Users" ToRole="User_Bank_Details" />
+          <NavigationProperty Name="User_Funds" Relationship="Self.FK__User_Fund__Usern__67DE6983" FromRole="Users" ToRole="User_Funds" />
+          <NavigationProperty Name="User_Profile_Details" Relationship="Self.FK__Users__UserId__66EA454A" FromRole="Users" ToRole="User_Profile_Details" />
+        </EntityType>
+        <Association Name="FK__Account_D__UserI__54CB950F">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="Account_Details" Type="Self.Account_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Account_Details">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Account_D__Usern__640DD89F">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Account_Details" Type="Self.Account_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Account_Details">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cards__CardInfoI__6442E2C9">
+          <End Role="CardInfo" Type="Self.CardInfo" Multiplicity="0..1" />
+          <End Role="Cards" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardInfo">
+              <PropertyRef Name="CardInfoId" />
+            </Principal>
+            <Dependent Role="Cards">
+              <PropertyRef Name="CardInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scores__UserId__589C25F3">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="Scores" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Scores">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scores__Username__6501FCD8">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Scores" Type="Self.Score" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Scores">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Bank__UserI__5C6CB6D7">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="User_Bank_Details" Type="Self.User_Bank_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_Bank_Details">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Bank__Usern__65F62111">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Bank_Details" Type="Self.User_Bank_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="User_Bank_Details">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Fund__UserI__603D47BB">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="User_Funds" Type="Self.User_Funds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User_Funds">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_Fund__Usern__67DE6983">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Funds" Type="Self.User_Funds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="User_Funds">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__UserId__66EA454A">
+          <End Role="User_Profile_Details" Type="Self.User_Profile_Details" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Profile_Details">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account_Details" EntityType="Self.Account_Details" />
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="CardInfoes" EntityType="Self.CardInfo" />
+          <EntitySet Name="Cards" EntityType="Self.Card" />
+          <EntitySet Name="Scores" EntityType="Self.Score" />
+          <EntitySet Name="User_Bank_Details" EntityType="Self.User_Bank_Details" />
+          <EntitySet Name="User_Funds" EntityType="Self.User_Funds" />
+          <EntitySet Name="User_Profile_Details" EntityType="Self.User_Profile_Details" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Account_D__UserI__54CB950F" Association="Self.FK__Account_D__UserI__54CB950F">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="Account_Details" EntitySet="Account_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Account_D__Usern__640DD89F" Association="Self.FK__Account_D__Usern__640DD89F">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Account_Details" EntitySet="Account_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cards__CardInfoI__6442E2C9" Association="Self.FK__Cards__CardInfoI__6442E2C9">
+            <End Role="CardInfo" EntitySet="CardInfoes" />
+            <End Role="Cards" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scores__UserId__589C25F3" Association="Self.FK__Scores__UserId__589C25F3">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="Scores" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scores__Username__6501FCD8" Association="Self.FK__Scores__Username__6501FCD8">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Scores" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Bank__UserI__5C6CB6D7" Association="Self.FK__User_Bank__UserI__5C6CB6D7">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="User_Bank_Details" EntitySet="User_Bank_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Bank__Usern__65F62111" Association="Self.FK__User_Bank__Usern__65F62111">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Bank_Details" EntitySet="User_Bank_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Fund__UserI__603D47BB" Association="Self.FK__User_Fund__UserI__603D47BB">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="User_Funds" EntitySet="User_Funds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_Fund__Usern__67DE6983" Association="Self.FK__User_Fund__Usern__67DE6983">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Funds" EntitySet="User_Funds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__UserId__66EA454A" Association="Self.FK__Users__UserId__66EA454A">
+            <End Role="User_Profile_Details" EntitySet="User_Profile_Details" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities6">
+          <EntitySetMapping Name="Account_Details">
+            <EntityTypeMapping TypeName="Model.Account_Details">
+              <MappingFragment StoreEntitySet="Account_Details">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Bankbalance" ColumnName="Bankbalance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="Model.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+                <ScalarProperty Name="A_uname" ColumnName="A_uname" />
+                <ScalarProperty Name="A_password" ColumnName="A_password" />
+                <ScalarProperty Name="A_lastlogin" ColumnName="A_lastlogin" />
+                <ScalarProperty Name="A_maxlimit" ColumnName="A_maxlimit" />
+                <ScalarProperty Name="A_minlimit" ColumnName="A_minlimit" />
+                <ScalarProperty Name="A_checkflag" ColumnName="A_checkflag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardInfoes">
+            <EntityTypeMapping TypeName="Model.CardInfo">
+              <MappingFragment StoreEntitySet="CardInfo">
+                <ScalarProperty Name="CardInfoId" ColumnName="CardInfoId" />
+                <ScalarProperty Name="PokerOrder" ColumnName="PokerOrder" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="Model.Card">
+              <MappingFragment StoreEntitySet="Cards">
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="CardInfoId" ColumnName="CardInfoId" />
+                <ScalarProperty Name="Deck" ColumnName="Deck" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scores">
+            <EntityTypeMapping TypeName="Model.Score">
+              <MappingFragment StoreEntitySet="Scores">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LostCount" ColumnName="LostCount" />
+                <ScalarProperty Name="WinCount" ColumnName="WinCount" />
+                <ScalarProperty Name="BJCount" ColumnName="BJCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Bank_Details">
+            <EntityTypeMapping TypeName="Model.User_Bank_Details">
+              <MappingFragment StoreEntitySet="User_Bank_Details">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Cardnumber" ColumnName="Cardnumber" />
+                <ScalarProperty Name="Cardname" ColumnName="Cardname" />
+                <ScalarProperty Name="Cardexpiry" ColumnName="Cardexpiry" />
+                <ScalarProperty Name="pin" ColumnName="pin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Funds">
+            <EntityTypeMapping TypeName="Model.User_Funds">
+              <MappingFragment StoreEntitySet="User_Funds">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Funds" ColumnName="Funds" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Profile_Details">
+            <EntityTypeMapping TypeName="Model.User_Profile_Details">
+              <MappingFragment StoreEntitySet="User_Profile_Details">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sanswer" ColumnName="Sanswer" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Dateofbirth" ColumnName="Dateofbirth" />
+                <ScalarProperty Name="Squestion" ColumnName="Squestion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

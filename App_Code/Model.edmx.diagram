@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c4f16f725f3a48b5a949c733d7c2c2db" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Account_Details" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Admin" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CardInfo" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Card" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Score" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_Bank_Details" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_Funds" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_Profile_Details" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__Account_D__UserI__54CB950F" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Account_D__Usern__640DD89F" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Cards__CardInfoI__6442E2C9" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Scores__UserId__589C25F3" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Scores__Username__6501FCD8" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__User_Bank__UserI__5C6CB6D7" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__User_Bank__Usern__65F62111" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__User_Fund__UserI__603D47BB" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__User_Fund__Usern__67DE6983" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Users__UserId__66EA454A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,60 @@
+﻿ body
+{
+    background-image:url("../OtherImages/Blackjack_background.jpg")
+}
+ h1
+ {
+     text-align:center;
+ }
+.wrapper 
+{
+    width: 950px;
+    margin: auto;
+}
+   .menu
+   {
+       /*background-color:rgb(10,110,178); swathi*/
+        background-color:darkblue;
+       width:86%;
+       margin:0px 0px 10px;
+       padding:0px;
+       color:darkblue;
+       border-radius:5px 5px 5px 5px;
+       height: 38px;
+}
+.menu ul
+{    
+    width: 786px;
+    height: 80px;
+}
+   .menu ul li
+   {
+       float:left;
+       display:block;
+       list-style:none;
+       border-right:1px solid rgb(10,85,125);
+       border-left:1px solid rgb(67,153,200);
+       width: 147px;
+       height: 41px;
+}
+   .menu ul li a
+   {
+       font-size:13px;
+       font-weight:bold;
+       line-height:40px;
+       padding:8px 20px;
+       color:darkblue;
+       text-decoration:none;
+   }
+  .clear
+  {
+      clear:both;
+  }
+  footer
+  {
+      color:white;
+      padding:5px;
+      background-color:crimson;
+      text-align:center;
+      bottom:0%;
+  }

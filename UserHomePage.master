@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="UserHomePage.master.cs" Inherits="UserHomePage" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+       <%-- <link href="Styles/UserHomePageMaster.css" rel="stylesheet" />--%>
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table>
+            <tr>
+                <td colspan="2" style="width:2000px;height:10px;text-align:center;background-color:#808080">BLACKJACK BY team 24</td>
+            </tr>
+            <tr>
+                <td style="width:250px;height:650px;">
+                    <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" StaticDisplayLevels="2"></asp:Menu>
+                    <asp:SiteMapDataSource runat="server" ID="SiteMapDataSource1"></asp:SiteMapDataSource>
+                </td>
+                <td style="width:750px;height:650px">
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+                </td>
+               </tr>
+            <tr>
+                <td colspan="2" style="width:1000px;height:10px;text-align:center;background-color:#808080">
+                    ©UHCL ISAM5339
+                </td>
+            </tr>
+        </table>
+        
+    </div>
+    </form>
+</body>
+</html>
